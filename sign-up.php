@@ -1,5 +1,8 @@
 <?php   
 
+include 'functions.php';
+
+
 $errors = [];
 $firstname = '';
 $lastname = '';
@@ -40,6 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          $errors['psw_confirm'] = 'Your password must match the password you created first';
     }
      if (empty($errors)) {
+         $user_details = [
+         'firstname' => $firstname,
+         'lastname' => $lastname,
+         'email' => $email,
+         'password' => $password,
+         'confirmPassword' => $psw_confirm,
+         ];
+
+         register_user($user_details);
+
     header("location: homepage.php");
    }
 }
